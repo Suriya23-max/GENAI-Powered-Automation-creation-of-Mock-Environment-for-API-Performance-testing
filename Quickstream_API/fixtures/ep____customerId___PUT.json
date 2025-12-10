@@ -1,0 +1,20 @@
+{
+  "status": 200,
+  "body": {
+    "customerNumber": "TEST_CUSTOMER_2222",
+    "customerName": "Rest Test Customer Modified",
+    "enabled": "true",
+    "phoneNumber": "0249222333",
+    "emailAddress": "email2@example.com",
+    "preferredNotificationMedium": "EMAIL",
+    "address": {
+      "street1": "Qvalent Pty. Ltd.",
+      "street2": "Level 1",
+      "street3": "Stockland Wallsend",
+      "city": "Newcastle",
+      "state": "NSW",
+      "postcode": "2287",
+      "country": "AU"
+    }
+  }
+}

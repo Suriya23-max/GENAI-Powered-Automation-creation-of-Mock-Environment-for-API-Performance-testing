@@ -1,0 +1,3214 @@
+{
+	"info": {
+		"_postman_id": "02487997-d922-4325-bce4-56d7ba53315e",
+		"name": "Quickstream REST API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8991660"
+	},
+	"item": [
+		{
+			"name": "API Keys",
+			"item": [
+				{
+					"name": "GET Latest API-Key",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}api-keys/latest",
+							"host": [
+								"{{urlPrefix}}api-keys"
+							],
+							"path": [
+								"latest"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Accounts",
+			"item": [
+				{
+					"name": "List customer accounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}customers/{{customerId}}/accounts",
+							"host": [
+								"{{urlPrefix}}customers"
+							],
+							"path": [
+								"{{customerId}}",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"accountToken\", jsonData.accountToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"singleUseTokenId\" : \"{{singleUseTokenId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}customers/accounts",
+							"host": [
+								"{{urlPrefix}}customers"
+							],
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get account",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}accounts/{{accountToken}}",
+							"host": [
+								"{{urlPrefix}}accounts"
+							],
+							"path": [
+								"{{accountToken}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update account",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cardholderName\": \"Test name 2\"\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}accounts/{{accountToken}}",
+							"host": [
+								"{{urlPrefix}}accounts"
+							],
+							"path": [
+								"{{accountToken}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Disable account",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}accounts/{{accountToken}}",
+							"host": [
+								"{{urlPrefix}}accounts"
+							],
+							"path": [
+								"{{accountToken}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Businesses",
+			"item": [
+				{
+					"name": "List businesses",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}businesses",
+							"host": [
+								"{{urlPrefix}}businesses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get business",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}businesses/{{supplierBusinessCode}}",
+							"host": [
+								"{{urlPrefix}}businesses"
+							],
+							"path": [
+								"{{supplierBusinessCode}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get accepted cards",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}businesses/{{supplierBusinessCode}}/accepted-cards",
+							"host": [
+								"{{urlPrefix}}businesses"
+							],
+							"path": [
+								"{{supplierBusinessCode}}",
+								"accepted-cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get card surcharges",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{publishableKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}businesses/{{supplierBusinessCode}}/card-surcharges",
+							"host": [
+								"{{urlPrefix}}businesses"
+							],
+							"path": [
+								"{{supplierBusinessCode}}",
+								"card-surcharges"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get card surcharge",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"cardNumber\": \"4111111111111111\"\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}businesses/{{supplierBusinessCode}}/query-card-surcharge",
+							"host": [
+								"{{urlPrefix}}businesses"
+							],
+							"path": [
+								"{{supplierBusinessCode}}",
+								"query-card-surcharge"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Credit Cards",
+			"item": [
+				{
+					"name": "Get Card Scheme",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{publishableKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}credit-cards/card-schemes/411111",
+							"host": [
+								"{{urlPrefix}}credit-cards"
+							],
+							"path": [
+								"card-schemes",
+								"411111"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customers",
+			"item": [
+				{
+					"name": "Search customers",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}customers?customerNumber=",
+							"host": [
+								"{{urlPrefix}}customers"
+							],
+							"query": [
+								{
+									"key": "customerNumber",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get customer",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}customers/{{customerId}}",
+							"host": [
+								"{{urlPrefix}}customers"
+							],
+							"path": [
+								"{{customerId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"customerId\", jsonData.customerId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerNumber\": \"TEST_CUSTOMER_1111\",\r\n    \"customerName\": \"Rest Test Customer\",\r\n    \"phoneNumber\": \"0249111222\",\r\n    \"emailAddress\": \"email@example.com\",\r\n    \"preferredNotificationMedium\": \"EMAILANDSMS\",\r\n    \"address\" : {\r\n    \t\"street1\": \"Qvalent Pty. Ltd.\",\r\n    \t\"street2\": \"Level 1\",\r\n    \t\"street3\": \"Stockland Wallsend\",\r\n    \t\"city\": \"Newcastle\",\r\n    \t\"state\": \"NSW\",\r\n    \t\"postcode\": \"2287\",\r\n    \t\"country\" : \"AU\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}customers",
+							"host": [
+								"{{urlPrefix}}customers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update customer",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerNumber\": \"TEST_CUSTOMER_2222\",\r\n    \"customerName\": \"Rest Test Customer Modified\",\r\n    \"enabled\": \"true\",\r\n    \"phoneNumber\": \"0249222333\",\r\n    \"emailAddress\": \"email2@example.com\",\r\n    \"preferredNotificationMedium\": \"EMAIL\",\r\n    \"address\" : {\r\n    \t\"street1\": \"Qvalent Pty. Ltd.\",\r\n    \t\"street2\": \"Level 1\",\r\n    \t\"street3\": \"Stockland Wallsend\",\r\n    \t\"city\": \"Newcastle\",\r\n    \t\"state\": \"NSW\",\r\n    \t\"postcode\": \"2287\",\r\n    \t\"country\" : \"AU\"\r\n    }\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}customers/{{customerId}}",
+							"host": [
+								"{{urlPrefix}}customers"
+							],
+							"path": [
+								"{{customerId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update customer status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"enabled\": false\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}customers/{{customerId}}",
+							"host": [
+								"{{urlPrefix}}customers"
+							],
+							"path": [
+								"{{customerId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List customer accounts",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}customers/{{customerId}}/accounts",
+							"host": [
+								"{{urlPrefix}}customers"
+							],
+							"path": [
+								"{{customerId}}",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register account",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"accountToken\", jsonData.accountToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"singleUseTokenId\" : \"{{singleUseTokenId}}\"\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}customers/{{customerId}}/accounts",
+							"host": [
+								"{{urlPrefix}}customers"
+							],
+							"path": [
+								"{{customerId}}",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register account with Scheme Tokenisation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"accountToken\", jsonData.accountToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"singleUseTokenId\" : \"{{singleUseTokenId}}\",\n    \"schemeTokenisation\": {\n        \"emailAddress\": \"email@example.com\",\n        \"ipAddress\": \"192.168.1.254\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}customers/{{customerId}}/accounts",
+							"host": [
+								"{{urlPrefix}}customers"
+							],
+							"path": [
+								"{{customerId}}",
+								"accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List recurring payments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}customers/{{customerId}}/recurring-payments",
+							"host": [
+								"{{urlPrefix}}customers"
+							],
+							"path": [
+								"{{customerId}}",
+								"recurring-payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create recurring payment",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const dateNow= new Date();\r",
+									"var month = (dateNow.getMonth()+1).toString();\r",
+									"if(month.length == 1){\r",
+									"    month = '0'+month;\r",
+									"}\r",
+									"pm.collectionVariables.set('currentDate', dateNow.getFullYear()+\"-\"+month+\"-\"+dateNow.getDate());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"paymentScheduleId\", jsonData.paymentScheduleId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"paymentScheduleCode\" : \"SCHEDULE_CODE\",\r\n    \"scheduleType\" : \"STOP_AFTER_SET_AMOUNT\",\r\n    \"supplierBusinessCode\" : \"{{supplierBusinessCode}}\",\r\n    \"frequency\" : \"WEEKLY\",\r\n    \"nextPaymentDate\" : \"{{currentDate}}\",\r\n    \"instalmentAmount\" : \"10\",\r\n    \"totalPaymentAmount\" : \"100\",\r\n    \"currency\": \"AUD\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}customers/{{customerId}}/recurring-payments",
+							"host": [
+								"{{urlPrefix}}customers"
+							],
+							"path": [
+								"{{customerId}}",
+								"recurring-payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List customer transactions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}customers/{{customerId}}/transactions",
+							"host": [
+								"{{urlPrefix}}customers"
+							],
+							"path": [
+								"{{customerId}}",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Recurring Payments",
+			"item": [
+				{
+					"name": "List recurring payments",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}customers/{{customerId}}/recurring-payments",
+							"host": [
+								"{{urlPrefix}}customers"
+							],
+							"path": [
+								"{{customerId}}",
+								"recurring-payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get recurring payment",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}recurring-payments/{{paymentScheduleId}}",
+							"host": [
+								"{{urlPrefix}}recurring-payments"
+							],
+							"path": [
+								"{{paymentScheduleId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create recurring payment",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const dateNow= new Date();\r",
+									"var month = (dateNow.getMonth()+1).toString();\r",
+									"if(month.length == 1){\r",
+									"    month = '0'+month;\r",
+									"}\r",
+									"pm.collectionVariables.set('currentDate', dateNow.getFullYear()+\"-\"+month+\"-\"+dateNow.getDate());"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"paymentScheduleId\", jsonData.paymentScheduleId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"paymentScheduleCode\" : \"SCHEDULE_CODE\",\r\n    \"scheduleType\" : \"STOP_AFTER_SET_AMOUNT\",\r\n    \"supplierBusinessCode\" : \"{{supplierBusinessCode}}\",\r\n    \"frequency\" : \"WEEKLY\",\r\n    \"nextPaymentDate\" : \"{{currentDate}}\",\r\n    \"instalmentAmount\" : \"10\",\r\n    \"totalPaymentAmount\" : \"100\",\r\n    \"currency\": \"AUD\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}customers/{{customerId}}/recurring-payments",
+							"host": [
+								"{{urlPrefix}}customers"
+							],
+							"path": [
+								"{{customerId}}",
+								"recurring-payments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update recurring payment",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const dateNow= new Date();\r",
+									"var month = (dateNow.getMonth()+1).toString();\r",
+									"if(month.length == 1){\r",
+									"    month = '0'+month;\r",
+									"}\r",
+									"pm.collectionVariables.set('currentDate', dateNow.getFullYear()+\"-\"+month+\"-\"+dateNow.getDate());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"scheduleType\" : \"STOP_AFTER_SET_NUMBER_OF_PAYMENTS\",\r\n    \"frequency\" : \"FORTNIGHTLY\",\r\n    \"nextPaymentDate\" : \"{{currentDate}}\",\r\n    \"instalmentAmount\" : \"6.00\",\r\n    \"remainingInstalments\": \"2\",\r\n    \"currency\": \"AUD\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}recurring-payments/{{paymentScheduleId}}",
+							"host": [
+								"{{urlPrefix}}recurring-payments"
+							],
+							"path": [
+								"{{paymentScheduleId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update recurring payment status",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"DISABLE\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}recurring-payments/{{paymentScheduleId}}",
+							"host": [
+								"{{urlPrefix}}recurring-payments"
+							],
+							"path": [
+								"{{paymentScheduleId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List payment history",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}recurring-payments/{{paymentScheduleId}}/transactions",
+							"host": [
+								"{{urlPrefix}}recurring-payments"
+							],
+							"path": [
+								"{{paymentScheduleId}}",
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Root",
+			"item": [
+				{
+					"name": "Root",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}",
+							"host": [
+								"{{urlPrefix}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Single Use Tokens",
+			"item": [
+				{
+					"name": "Create Card Single Use Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"singleUseTokenId\", jsonData.singleUseTokenId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{publishableKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountType\" : \"CREDIT_CARD\",\r\n    \"cardholderName\" : \"Rest Test\",\r\n    \"cardNumber\" : \"4111111111111111\",\r\n    \"expiryDateMonth\": \"12\",\r\n    \"expiryDateYear\": \"2025\",\r\n    \"cvn\": \"123\",\r\n    \"supplierBusinessCode\": \"{{supplierBusinessCode}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}single-use-tokens",
+							"host": [
+								"{{urlPrefix}}single-use-tokens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create 3DS Single Use Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"singleUseTokenId\", jsonData.singleUseTokenId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{publishableKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"accountType\" : \"CREDIT_CARD\",\r\n\t\"cardholderName\" : \"Rest Test\",\r\n\t\"cardNumber\" : \"4111111111111111\",\r\n\t\"expiryDateMonth\": \"12\",\r\n\t\"expiryDateYear\": \"2025\",\r\n\t\"cvn\": \"123\",\r\n\t\"supplierBusinessCode\": \"{{supplierBusinessCode}}\",\r\n\t\"browserProfile\": {\r\n\t\t\"browserJavaEnabled\": \"true\",\r\n\t\t\"browserLanguage\": \"en\",\r\n\t\t\"browserColorDepth\": \"1\",\r\n\t\t\"browserScreenHeight\": \"1000\",\r\n\t\t\"browserScreenWidth\": \"2000\",\r\n\t\t\"browserTZ\": \"60\"\r\n\t}\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}single-use-tokens",
+							"host": [
+								"{{urlPrefix}}single-use-tokens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3DS Authentication",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{publishableKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"messageCategory\": \"01\",\r\n\t\"threeDSRequestorAuthenticationInd\": \"01\",\r\n\t\"principalAmount\": \"10.00\",\r\n\t\"currency\": \"AUD\",\r\n\t\"recurringExpiry\": \"20240926\",\r\n\t\"recurringFrequency\": \"31\",\r\n\t\"deliveryEmailAddress\": \"customer@example.com.au\",\r\n\t\"deliveryTimeframe\": \"02\",\r\n\t\"giftCardAmount\": \"124\",\r\n\t\"giftCardCount\": \"02\",\r\n\t\"giftCardCurr\": \"036\",\r\n\t\"preOrderDate\": \"20210926\",\r\n\t\"preOrderPurchaseInd\": \"02\",\r\n\t\"reorderItemsInd\": \"02\",\r\n\t\"shipIndicator\": \"02\",\r\n\t\"email\": \"customer@example.com.au\",\r\n\t\"homePhone\": \"+61499999999\",\r\n\t\"mobilePhone\": \"+61499999999\",\r\n\t\"workPhone\": \"+61499999999\",\r\n\t\"billAddrLine1\": \"Shop 11\",\r\n\t\"billAddrLine2\": \"Level 2\",\r\n\t\"billAddrLine3\": \"New Village\",\r\n\t\"billAddrCity\": \"Newcastle\",\r\n\t\"billAddrPostCode\": \"2000\",\r\n\t\"billAddrState\": \"NSW\",\r\n\t\"billAddrCountry\": \"061\",\r\n\t\"addrMatch\": \"Y\",\r\n\t\"shipAddrLine1\": \"Shop 11\",\r\n\t\"shipAddrLine2\": \"Level 2\",\r\n\t\"shipAddrLine3\": \"New Vilage\",\r\n\t\"shipAddrCity\": \"Newcastle\",\r\n\t\"shipAddrPostCode\": \"2000\",\r\n\t\"shipAddrState\": \"NSW\",\r\n\t\"shipAddrCountry\": \"061\",\r\n\t\"acctID\": \"CUST12345678\",\r\n\t\"chAccAgeInd\": \"01\",\r\n\t\"chAccChange\": \"20220926\",\r\n\t\"chAccChangeInd\": \"01\",\r\n\t\"chAccDate\": \"20220926\",\r\n\t\"chAccPwChange\": \"20220926\",\r\n\t\"chAccPwChangeInd\": \"01\",\r\n\t\"nbPurchaseAccount\": \"2\",\r\n\t\"paymentAccAge\": \"20220926\",\r\n\t\"paymentAccInd\": \"01\",\r\n\t\"shipAddressUsage\": \"20220926\",\r\n\t\"shipAddressUsageInd\": \"03\",\r\n\t\"provisionAttemptsDay\": \"2\",\r\n\t\"shipNameIndicator\": \"02\",\r\n\t\"suspiciousAccActivity\": \"02\",\r\n\t\"txnActivityDay\": \"2\",\r\n\t\"txnActivityYear\": \"61\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}single-use-tokens/{{singleUseTokenId}}/three-ds2-authentication",
+							"host": [
+								"{{urlPrefix}}single-use-tokens"
+							],
+							"path": [
+								"{{singleUseTokenId}}",
+								"three-ds2-authentication"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Bank Account Single Use Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"singleUseTokenId\", jsonData.singleUseTokenId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{publishableKey}}"
+							},
+							{
+								"key": "Idempotency-Key",
+								"value": "123456789123456",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountType\" : \"DIRECT_DEBIT\",\r\n    \"accountName\" : \"Rest Test\",\r\n    \"bsb\" : \"032-999\",\r\n    \"accountNumber\": \"999994\",\r\n    \"supplierBusinessCode\": \"{{supplierBusinessCode}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}single-use-tokens",
+							"host": [
+								"{{urlPrefix}}single-use-tokens"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "Get details",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}transactions/{{receiptNumber}}",
+							"host": [
+								"{{urlPrefix}}transactions"
+							],
+							"path": [
+								"{{receiptNumber}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Recent Transactions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}transactions?supplierBusinessCode={{supplierBusinessCode}}",
+							"host": [
+								"{{urlPrefix}}transactions"
+							],
+							"query": [
+								{
+									"key": "supplierBusinessCode",
+									"value": "{{supplierBusinessCode}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Transactions for reference number",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}transactions/for-reference-number?referenceNumber={{referenceNumber}}",
+							"host": [
+								"{{urlPrefix}}transactions"
+							],
+							"path": [
+								"for-reference-number"
+							],
+							"query": [
+								{
+									"key": "referenceNumber",
+									"value": "{{referenceNumber}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Transactions for settlement date",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const dateNow= new Date();\r",
+									"var month = (dateNow.getMonth()+1).toString();\r",
+									"if(month.length == 1){\r",
+									"    month = '0'+month;\r",
+									"}\r",
+									"pm.environment.set('currentDate', dateNow.getFullYear()+\"-\"+month+\"-\"+dateNow.getDate());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}transactions/for-settlement-date?settlementDate={{currentDate}}",
+							"host": [
+								"{{urlPrefix}}transactions"
+							],
+							"path": [
+								"for-settlement-date"
+							],
+							"query": [
+								{
+									"key": "settlementDate",
+									"value": "{{currentDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Transactions for account token",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}transactions/for-account-token?accountToken={{accountToken}}",
+							"host": [
+								"{{urlPrefix}}transactions"
+							],
+							"path": [
+								"for-account-token"
+							],
+							"query": [
+								{
+									"key": "accountToken",
+									"value": "{{accountToken}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Transactions for credit card",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}transactions/for-credit-card?firstSix=412345&lastThree=789",
+							"host": [
+								"{{urlPrefix}}transactions"
+							],
+							"path": [
+								"for-credit-card"
+							],
+							"query": [
+								{
+									"key": "firstSix",
+									"value": "412345"
+								},
+								{
+									"key": "lastThree",
+									"value": "789"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Transactions for bank account",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}transactions/for-bank-account?bsb=032-999&accountNumber=999994",
+							"host": [
+								"{{urlPrefix}}transactions"
+							],
+							"path": [
+								"for-bank-account"
+							],
+							"query": [
+								{
+									"key": "bsb",
+									"value": "032-999"
+								},
+								{
+									"key": "accountNumber",
+									"value": "999994"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List suspended transactions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}transactions/suspended?supplierBusinessCode={{supplierBusinessCode}}&month=2019-12",
+							"host": [
+								"{{urlPrefix}}transactions"
+							],
+							"path": [
+								"suspended"
+							],
+							"query": [
+								{
+									"key": "supplierBusinessCode",
+									"value": "{{supplierBusinessCode}}"
+								},
+								{
+									"key": "month",
+									"value": "2019-12"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List returned transactions",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const dateNow= new Date();\r",
+									"var month = (dateNow.getMonth()+1).toString();\r",
+									"if(month.length == 1){\r",
+									"    month = '0'+month;\r",
+									"}\r",
+									"pm.environment.set('currentDate', dateNow.getFullYear()+\"-\"+month+\"-\"+dateNow.getDate());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}transactions/returns?supplierBusinessCode={{supplierBusinessCode}}&date={{currentDate}}",
+							"host": [
+								"{{urlPrefix}}transactions"
+							],
+							"path": [
+								"returns"
+							],
+							"query": [
+								{
+									"key": "supplierBusinessCode",
+									"value": "{{supplierBusinessCode}}"
+								},
+								{
+									"key": "date",
+									"value": "{{currentDate}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List open pre-authorisations",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}transactions/open-preauths?month=2020-02",
+							"host": [
+								"{{urlPrefix}}transactions"
+							],
+							"path": [
+								"open-preauths"
+							],
+							"query": [
+								{
+									"key": "month",
+									"value": "2020-02"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Transaction",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}transactions/{{receiptNumber}}",
+							"host": [
+								"{{urlPrefix}}transactions"
+							],
+							"path": [
+								"{{receiptNumber}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Transaction Refunds",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}transactions/{{receiptNumber}}/refunds",
+							"host": [
+								"{{urlPrefix}}transactions"
+							],
+							"path": [
+								"{{receiptNumber}}",
+								"refunds"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "View Transaction Retries",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}transactions/{{receiptNumber}}/retries",
+							"host": [
+								"{{urlPrefix}}transactions"
+							],
+							"path": [
+								"{{receiptNumber}}",
+								"retries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Take Payment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"receiptNumber\", jsonData.receiptNumber);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"singleUseTokenId\": \"{{singleUseTokenId}}\",\r\n    \"transactionType\": \"PAYMENT\",\r\n    \"supplierBusinessCode\": \"{{supplierBusinessCode}}\",\r\n    \"principalAmount\": 100.00,\r\n    \"eci\": \"INTERNET\",\r\n    \"currency\": \"AUD\",\r\n    \"ipAddress\": \"192.168.1.0\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}transactions",
+							"host": [
+								"{{urlPrefix}}transactions"
+							]
+						},
+						"description": "Take Transaction"
+					},
+					"response": []
+				},
+				{
+					"name": "Take Payment using Account Tokens",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"receiptNumber\", jsonData.receiptNumber);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"accountToken\": \"{{accountToken}}\",\r\n    \"transactionType\": \"PAYMENT\",\r\n    \"supplierBusinessCode\": \"{{supplierBusinessCode}}\",\r\n    \"principalAmount\": 100.00,\r\n    \"currency\": \"AUD\",\r\n    \"eci\": \"MAIL\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}transactions",
+							"host": [
+								"{{urlPrefix}}transactions"
+							]
+						},
+						"description": "Take Transaction"
+					},
+					"response": []
+				},
+				{
+					"name": "Take Payment for PayTo Agreement",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"receiptNumber\", jsonData.receiptNumber);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionType\" : \"PAYMENT\",\r\n    \"payToData\": {\r\n        \"agreementToken\": \"{{agreementToken}}\",\r\n        \"remittanceInformation1\": \"PAYMENT FOR CUSTOMERA\",\r\n        \"endToEndId\": \"INV-123456790\",\r\n        \"finalPayment\": false\r\n    },\r\n    \"supplierBusinessCode\": \"{{supplierBusinessCode}}\",\r\n    \"principalAmount\": 0.99,\r\n    \"currency\" : \"AUD\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}transactions",
+							"host": [
+								"{{urlPrefix}}transactions"
+							]
+						},
+						"description": "Take Transaction"
+					},
+					"response": []
+				},
+				{
+					"name": "Take Payment for e-Commerce PayTo Agreement",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"receiptNumber\", jsonData.receiptNumber);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionType\" : \"PAYMENT\",\r\n    \"payToData\": {\r\n        \"endToEndId\": \"INV-123456790\",\r\n        \"remittanceInformation1\": \"ECOM PAYMENT TO CUSTOMERA\",\r\n        \"payToAgreement\" : {\r\n            \"supplierBusinessCode\": \"{{supplierBusinessCode}}\",\r\n            \"paymentDetails\": {\r\n                \"purpose\": \"RETL\",\r\n                \"description\": \"Your license renewal payment.\"\r\n            },\r\n            \"payerDetails\": {\r\n                \"payerType\": \"PERS\",\r\n                \"payerId\": \"PS19400650001\",\r\n                \"payerName\": \"FIRSTNAME SURNAME\",\r\n                \"payerReference\": \"PY19000890013\",\r\n                \"payIdType\": \"EMAL\",\r\n                \"payId\": \"FIRSTNAME.SURNAME@MYCUSTOMER.COM.AU\"\r\n            }\r\n        }\r\n    },\r\n    \"supplierBusinessCode\": \"{{supplierBusinessCode}}\",\r\n    \"principalAmount\": 10.00,\r\n    \"currency\" : \"AUD\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}transactions",
+							"host": [
+								"{{urlPrefix}}transactions"
+							]
+						},
+						"description": "Take Transaction"
+					},
+					"response": []
+				},
+				{
+					"name": "Take Payment using Customer ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"receiptNumber\", jsonData.receiptNumber);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customerId\": \"{{customerId}}\",\r\n    \"transactionType\": \"PAYMENT\",\r\n    \"supplierBusinessCode\": \"{{supplierBusinessCode}}\",\r\n    \"principalAmount\": 100.00,\r\n    \"currency\": \"AUD\",\r\n    \"eci\": \"MAIL\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}transactions",
+							"host": [
+								"{{urlPrefix}}transactions"
+							]
+						},
+						"description": "Take Transaction"
+					},
+					"response": []
+				},
+				{
+					"name": "Take Payment using Single Use Tokens",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"receiptNumber\", jsonData.receiptNumber);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"singleUseTokenId\": \"{{singleUseTokenId}}\",\r\n    \"transactionType\": \"PAYMENT\",\r\n    \"supplierBusinessCode\": \"{{supplierBusinessCode}}\",\r\n    \"principalAmount\": 100.00,\r\n    \"eci\": \"INTERNET\",\r\n    \"currency\": \"AUD\",\r\n    \"ipAddress\": \"192.168.1.0\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}transactions",
+							"host": [
+								"{{urlPrefix}}transactions"
+							]
+						},
+						"description": "Take Transaction"
+					},
+					"response": []
+				},
+				{
+					"name": "Take Payment using Card Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"receiptNumber\", jsonData.receiptNumber);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionType\": \"PAYMENT\",\r\n    \"creditCard\": {\r\n        \"cardholderName\": \"rest test\",\r\n        \"cardNumber\": \"4242424242424242\",\r\n        \"expiryDateMonth\": \"12\",\r\n        \"expiryDateYear\": \"2025\",\r\n        \"cvn\": \"123\"\r\n    },\r\n    \"supplierBusinessCode\": \"{{supplierBusinessCode}}\",\r\n    \"principalAmount\": 100.00,\r\n    \"eci\": \"INTERNET\",\r\n    \"currency\": \"AUD\",\r\n    \"ipAddress\": \"192.168.1.0\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}transactions",
+							"host": [
+								"{{urlPrefix}}transactions"
+							]
+						},
+						"description": "Take Transaction"
+					},
+					"response": []
+				},
+				{
+					"name": "Take Payment using Bank Account Details",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"receiptNumber\", jsonData.receiptNumber);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\t\"bankAccount\": {\r\n\t\t\"accountName\": \"test account\",\r\n\t\t\"bsb\": \"032-002\",\r\n\t\t\"accountNumber\": \"123465\"\r\n\t},\r\n\t\"transactionType\": \"PAYMENT\",\r\n\t\"supplierBusinessCode\": \"{{supplierBusinessCode}}\",\r\n\t\"principalAmount\": 10.00,\r\n\t\"currency\": \"AUD\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}transactions",
+							"host": [
+								"{{urlPrefix}}transactions"
+							]
+						},
+						"description": "Take Transaction"
+					},
+					"response": []
+				},
+				{
+					"name": "Refund Transaction",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"receiptNumber\", jsonData.receiptNumber);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionType\": \"REFUND\",\r\n    \"principalAmount\": \"12.00\",\r\n    \"originalReceiptNumber\": \"{{originalReceiptNumber}}\",\r\n    \"currency\": \"AUD\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}transactions",
+							"host": [
+								"{{urlPrefix}}transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Void Transaction",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}transactions/{{receiptNumber}}/void",
+							"host": [
+								"{{urlPrefix}}transactions"
+							],
+							"path": [
+								"{{receiptNumber}}",
+								"void"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pre-authorisation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"receiptNumber\", jsonData.receiptNumber);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionType\": \"PREAUTH\",\r\n    \"supplierBusinessCode\": \"{{supplierBusinessCode}}\",\r\n    \"principalAmount\": 100.00,\r\n    \"currency\": \"AUD\",\r\n    \"eci\": \"INTERNET\",\r\n    \"ipAddress\": \"192.168.1.1\",\r\n    \"singleUseTokenId\": \"{{singleUseTokenId}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}transactions",
+							"host": [
+								"{{urlPrefix}}transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Capture pre-authorisation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"receiptNumber\", jsonData.receiptNumber);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionType\": \"CAPTURE\",\r\n    \"principalAmount\": 100.00,\r\n    \"currency\": \"AUD\",\r\n    \"originalReceiptNumber\": \"{{originalReceiptNumber}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}transactions",
+							"host": [
+								"{{urlPrefix}}transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel pre-authorisation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"receiptNumber\", jsonData.receiptNumber);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionType\": \"PREAUTH_CANCELLATION\",\r\n    \"cancellationType\": \"FULL\",\r\n    \"principalAmount\": 100.00,\r\n    \"currency\": \"AUD\",\r\n    \"originalReceiptNumber\": \"{{originalReceiptNumber}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}transactions",
+							"host": [
+								"{{urlPrefix}}transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Incremental pre-authorisation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"receiptNumber\", jsonData.receiptNumber);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionType\": \"PREAUTH\",\r\n    \"authorisationType\": \"INCREMENTAL\",\r\n    \"principalAmount\": 100.00,\r\n    \"currency\": \"AUD\",\r\n    \"originalReceiptNumber\": \"{{originalReceiptNumber}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}transactions",
+							"host": [
+								"{{urlPrefix}}transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Extension pre-authorisation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"receiptNumber\", jsonData.receiptNumber);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionType\": \"PREAUTH\",\r\n    \"authorisationType\": \"EXTENSION\",\r\n    \"principalAmount\": 0.00,\r\n    \"currency\": \"AUD\",\r\n    \"originalReceiptNumber\": \"{{originalReceiptNumber}}\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}transactions",
+							"host": [
+								"{{urlPrefix}}transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Re-authorisation pre-authorisation",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"receiptNumber\", jsonData.receiptNumber);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionType\": \"PREAUTH\",\r\n    \"authorisationType\": \"REAUTHORISATION\",\r\n    \"principalAmount\": 100.00,\r\n    \"originalReceiptNumber\": \"{{originalReceiptNumber}}\",\r\n    \"currency\": \"AUD\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}transactions",
+							"host": [
+								"{{urlPrefix}}transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Account verification",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"receiptNumber\", jsonData.receiptNumber);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"transactionType\": \"ACCOUNT_VERIFICATION\",\r\n    \"supplierBusinessCode\": \"{{supplierBusinessCode}}\",\r\n    \"eci\": \"INTERNET\",\r\n    \"singleUseTokenId\": \"{{singleUseTokenId}}\",\r\n    \"ipAddress\": \"192.168.1.1\",\r\n    \"currency\": \"AUD\"\r\n}"
+						},
+						"url": {
+							"raw": "{{urlPrefix}}transactions",
+							"host": [
+								"{{urlPrefix}}transactions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download CSV Report",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const dateNow= new Date();\r",
+									"var month = (dateNow.getMonth()+1).toString();\r",
+									"if(month.length == 1){\r",
+									"    month = '0'+month;\r",
+									"}\r",
+									"pm.collectionVariables.set('currentDate', dateNow.getFullYear()+\"-\"+month+\"-\"+dateNow.getDate());"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							},
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}transactions/csv?version=2&settlementDate={{currentDate}}&transactionStatus=Approved",
+							"host": [
+								"{{urlPrefix}}transactions"
+							],
+							"path": [
+								"csv"
+							],
+							"query": [
+								{
+									"key": "version",
+									"value": "2"
+								},
+								{
+									"key": "settlementDate",
+									"value": "{{currentDate}}"
+								},
+								{
+									"key": "transactionStatus",
+									"value": "Approved"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment Files",
+			"item": [
+				{
+					"name": "Upload payment file",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"paymentFileId\", jsonData.paymentFileId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Prevent-CSRF",
+								"value": "true"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "format",
+									"value": "CSV",
+									"type": "text"
+								},
+								{
+									"key": "ignoreDuplicateCheck",
+									"value": "false",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{urlPrefix}}payment-files",
+							"host": [
+								"{{urlPrefix}}payment-files"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get payment file",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{urlPrefix}}payment-files/{{paymentFileId}}",
+							"host": [
+								"{{urlPrefix}}payment-files"
+							],
+							"path": [
+								"{{paymentFileId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List payment files",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}payment-files",
+							"host": [
+								"{{urlPrefix}}payment-files"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List payment file errors",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}payment-files/{{paymentFileId}}/errors",
+							"host": [
+								"{{urlPrefix}}payment-files"
+							],
+							"path": [
+								"{{paymentFileId}}",
+								"errors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get payment batch",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}payment-batches/{{paymentBatchId}}",
+							"host": [
+								"{{urlPrefix}}payment-batches"
+							],
+							"path": [
+								"{{paymentBatchId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List payment batches",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}payment-files/{{paymentBatchId}}/payment-batches",
+							"host": [
+								"{{urlPrefix}}payment-files"
+							],
+							"path": [
+								"{{paymentBatchId}}",
+								"payment-batches"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List payment batch transactions",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}payment-batches/{{paymentBatchId}}/transactions?status=Approved",
+							"host": [
+								"{{urlPrefix}}payment-batches"
+							],
+							"path": [
+								"{{paymentBatchId}}",
+								"transactions"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "Approved"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download Flat-file report",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}payment-files/{{paymentBatchId}}/flat-file",
+							"host": [
+								"{{urlPrefix}}payment-files"
+							],
+							"path": [
+								"{{paymentBatchId}}",
+								"flat-file"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Download CSV report",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{secretKey}}"
+							},
+							{
+								"key": "Accept",
+								"value": "text/plain"
+							}
+						],
+						"url": {
+							"raw": "{{urlPrefix}}payment-files/{{paymentBatchId}}/csv2",
+							"host": [
+								"{{urlPrefix}}payment-files"
+							],
+							"path": [
+								"{{paymentBatchId}}",
+								"csv2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PayTo Agreements",
+			"item": [
+				{
+					"name": "Create PayTo Agreement",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"postman.setEnvironmentVariable(\"agreementToken\", jsonData.agreementToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"supplierBusinessCode\": \"{{supplierBusinessCode}}\",\r\n    \"payeeReference\": \"MYREFERENCE\",\r\n    \"paymentDetails\": {\r\n        \"purpose\": \"RETL\",\r\n        \"description\": \"New PayTo Agreement\",\r\n        \"startDate\": \"2024-01-06\",\r\n        \"endDate\": \"2025-01-06\",\r\n        \"automaticRenewal\": false,\r\n        \"additionalInformation\": \"\"\r\n    },\r\n    \"paymentTerms\": {\r\n        \"frequency\": \"DAIL\",\r\n        \"agreementType\": \"VARI\",\r\n        \"maximumPaymentAmount\": \"0.99\",\r\n        \"paymentAmount\": \"0.01\",\r\n        \"currency\": \"AUD\"\r\n    },\r\n    \"payerDetails\": {\r\n        \"payerType\": \"PERS\",\r\n        \"payerId\": \"CUSTOMERA\",\r\n        \"payerName\": \"Customer A\",\r\n        \"ultimatePayerName\": \"Customer A\",\r\n        \"payerReference\": \"CUSTOMERA\",\r\n        \"bsb\": \"032002\",\r\n        \"accountNumber\": \"123465\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlPrefix}}payto-agreements",
+							"host": [
+								"{{urlPrefix}}payto-agreements"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get PayTo Agreement",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlPrefix}}payto-agreements/{{agreementToken}}",
+							"host": [
+								"{{urlPrefix}}payto-agreements"
+							],
+							"path": [
+								"{{agreementToken}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List PayTo Agreements",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{urlPrefix}}customers/{{customerId}}/payto-agreements?supplierBusinessCode={{supplierBusinessCode}}&status=ACTIVE",
+							"host": [
+								"{{urlPrefix}}customers"
+							],
+							"path": [
+								"{{customerId}}",
+								"payto-agreements"
+							],
+							"query": [
+								{
+									"key": "supplierBusinessCode",
+									"value": "{{supplierBusinessCode}}"
+								},
+								{
+									"key": "status",
+									"value": "ACTIVE"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Suspend PayTo Agreement",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"updateType\": \"STATUS_AMENDMENT\",\r\n    \"statusAmendment\": { \r\n        \"statusCode\": \"SUSPENDED\",\r\n        \"reasonCode\": \"MD17\",\r\n        \"reasonDescription\": \"PayTo Agreement Suspended\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlPrefix}}payto-agreements/{{agreementToken}}",
+							"host": [
+								"{{urlPrefix}}payto-agreements"
+							],
+							"path": [
+								"{{agreementToken}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unsuspend PayTo Agreement",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"updateType\": \"STATUS_AMENDMENT\",\r\n    \"statusAmendment\": { \r\n        \"statusCode\": \"ACTIVE\",\r\n        \"reasonCode\": \"MD17\",\r\n        \"reasonDescription\": \"PayTo Agreement Unsuspended\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlPrefix}}payto-agreements/{{agreementToken}}",
+							"host": [
+								"{{urlPrefix}}payto-agreements"
+							],
+							"path": [
+								"{{agreementToken}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cancel PayTo Agreement",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"updateType\": \"STATUS_AMENDMENT\",\r\n    \"statusAmendment\": { \r\n        \"statusCode\": \"CANCELLED\",\r\n        \"reasonCode\": \"MD17\",\r\n        \"reasonDescription\": \"PayTo Agreement Cancelled\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlPrefix}}payto-agreements/{{agreementToken}}",
+							"host": [
+								"{{urlPrefix}}payto-agreements"
+							],
+							"path": [
+								"{{agreementToken}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Recall PayTo Agreement",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"updateType\": \"RECALL_BILATERAL_AMENDMENT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlPrefix}}payto-agreements/{{agreementToken}}",
+							"host": [
+								"{{urlPrefix}}payto-agreements"
+							],
+							"path": [
+								"{{agreementToken}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Recall Bilateral Amendment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"updateType\": \"RECALL_PAYTO_AGREEMENT\",\r\n    \"recallPayToAgreement\": { \r\n        \"statusCode\": \"CANCELLED\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlPrefix}}payto-agreements/{{agreementToken}}",
+							"host": [
+								"{{urlPrefix}}payto-agreements"
+							],
+							"path": [
+								"{{agreementToken}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unilateral Amendment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"updateType\": \"UNILATERAL_AMENDMENT\",\r\n    \"unilateralAmendment\": { \r\n        \"description\": \"New PayTo Agreement Description\",\r\n        \"payeeReference\": \"MYNEWREFERENCE\",\r\n        \"supplierBusinessCode\": \"{{supplierBusinessCode}}\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlPrefix}}payto-agreements/{{agreementToken}}",
+							"host": [
+								"{{urlPrefix}}payto-agreements"
+							],
+							"path": [
+								"{{agreementToken}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bilateral Amendment",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"updateType\": \"BILATERAL_AMENDMENT\",\r\n    \"bilateralAmendment\": { \r\n        \"paymentDetails\": {\r\n            \"endDate\": \"2025-02-09\",\r\n            \"automaticRenewal\": false,\r\n            \"additionalInformation\": \"\"\r\n        },\r\n        \"paymentTerms\": {\r\n            \"frequency\": \"DAIL\",\r\n            \"agreementType\": \"VARI\",\r\n            \"maximumPaymentAmount\": \"0.99\",\r\n            \"paymentAmount\": \"0.02\",\r\n            \"currency\": \"AUD\"\r\n        }\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlPrefix}}payto-agreements/{{agreementToken}}",
+							"host": [
+								"{{urlPrefix}}payto-agreements"
+							],
+							"path": [
+								"{{agreementToken}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PayID",
+			"item": [
+				{
+					"name": "Register PayID for Customer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"payIdId\", jsonData.id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"payId\": \"mycustomera@mydomain.com.au\",\r\n  \"type\": \"STATIC\",\r\n  \"supplierBusinessCode\": \"{{supplierBusinessCode}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlPrefix}}/customers/{{customerId}}/payids",
+							"host": [
+								"{{urlPrefix}}"
+							],
+							"path": [
+								"customers",
+								"{{customerId}}",
+								"payids"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register PayID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"pm.collectionVariables.set(\"payIdId\", jsonData.id);\r",
+									"pm.collectionVariables.set(\"customerId\", jsonData.id);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"payId\": \"mycustomera@mydomain.com.au\",\r\n  \"type\": \"STATIC\",\r\n  \"supplierBusinessCode\": \"{{supplierBusinessCode}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlPrefix}}/payids",
+							"host": [
+								"{{urlPrefix}}"
+							],
+							"path": [
+								"payids"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deregister PayID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\": \"DEREGISTERED\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlPrefix}}/payids/{{payIdId}}",
+							"host": [
+								"{{urlPrefix}}"
+							],
+							"path": [
+								"payids",
+								"{{payIdId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get PayID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlPrefix}}/payids/{{payIdId}}",
+							"host": [
+								"{{urlPrefix}}"
+							],
+							"path": [
+								"payids",
+								"{{payIdId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List PayIDs",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{urlPrefix}}/customers/{{customerId}}/payids",
+							"host": [
+								"{{urlPrefix}}"
+							],
+							"path": [
+								"customers",
+								"{{customerId}}",
+								"payids"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "basic",
+		"basic": [
+			{
+				"key": "username",
+				"value": "{{secretKey}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "paymentBatchId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "paymentFileId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "originalReceiptNumber",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "urlPrefix",
+			"value": "https://api.quickstream.support.qvalent.com/rest/v1/",
+			"type": "string"
+		},
+		{
+			"key": "secretKey",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "publishableKey",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "supplierBusinessCode",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "receiptNumber",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "singleUseTokenId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "customerId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "accountToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "paymentScheduleId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "referenceNumber",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "currentDate",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "agreementToken",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "payIdId",
+			"value": ""
+		}
+	]
+}

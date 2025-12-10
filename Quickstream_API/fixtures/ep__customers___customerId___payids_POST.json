@@ -1,0 +1,8 @@
+{
+  "status": 201,
+  "body": {
+    "payId": "mycustomera@mydomain.com.au",
+    "type": "STATIC",
+    "supplierBusinessCode": "{{supplierBusinessCode}}"
+  }
+}

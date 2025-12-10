@@ -1,0 +1,10 @@
+{
+  "status": 201,
+  "body": {
+    "singleUseTokenId": "{{singleUseTokenId}}",
+    "schemeTokenisation": {
+      "emailAddress": "email@example.com",
+      "ipAddress": "192.168.1.254"
+    }
+  }
+}

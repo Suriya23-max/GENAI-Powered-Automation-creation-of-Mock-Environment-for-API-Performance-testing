@@ -1,0 +1,31 @@
+{
+  "status": 201,
+  "body": {
+    "supplierBusinessCode": "{{supplierBusinessCode}}",
+    "payeeReference": "MYREFERENCE",
+    "paymentDetails": {
+      "purpose": "RETL",
+      "description": "New PayTo Agreement",
+      "startDate": "2024-01-06",
+      "endDate": "2025-01-06",
+      "automaticRenewal": false,
+      "additionalInformation": ""
+    },
+    "paymentTerms": {
+      "frequency": "DAIL",
+      "agreementType": "VARI",
+      "maximumPaymentAmount": "0.99",
+      "paymentAmount": "0.01",
+      "currency": "AUD"
+    },
+    "payerDetails": {
+      "payerType": "PERS",
+      "payerId": "CUSTOMERA",
+      "payerName": "Customer A",
+      "ultimatePayerName": "Customer A",
+      "payerReference": "CUSTOMERA",
+      "bsb": "032002",
+      "accountNumber": "123465"
+    }
+  }
+}

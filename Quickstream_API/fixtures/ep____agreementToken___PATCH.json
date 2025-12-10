@@ -1,0 +1,20 @@
+{
+  "status": 200,
+  "body": {
+    "updateType": "BILATERAL_AMENDMENT",
+    "bilateralAmendment": {
+      "paymentDetails": {
+        "endDate": "2025-02-09",
+        "automaticRenewal": false,
+        "additionalInformation": ""
+      },
+      "paymentTerms": {
+        "frequency": "DAIL",
+        "agreementType": "VARI",
+        "maximumPaymentAmount": "0.99",
+        "paymentAmount": "0.02",
+        "currency": "AUD"
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "status": 201,
+  "body": {
+    "paymentScheduleCode": "SCHEDULE_CODE",
+    "scheduleType": "STOP_AFTER_SET_AMOUNT",
+    "supplierBusinessCode": "{{supplierBusinessCode}}",
+    "frequency": "WEEKLY",
+    "nextPaymentDate": "{{currentDate}}",
+    "instalmentAmount": "10",
+    "totalPaymentAmount": "100",
+    "currency": "AUD"
+  }
+}

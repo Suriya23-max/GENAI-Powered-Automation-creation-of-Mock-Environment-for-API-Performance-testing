@@ -1,0 +1,39 @@
+{
+  "info": {
+    "name": "Mock Single Use Token",
+    "_postman_id": "mock-single-use-token-collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Card Single Use Token",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Authorization",
+            "value": "{{secretKey}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"accountType\": \"CREDIT_CARD\",\n  \"cardholderName\": \"Rest Test\",\n  \"cardNumber\": \"4111111111111111\",\n  \"expiryDateMonth\": \"12\",\n  \"expiryDateYear\": \"2025\",\n  \"cvn\": \"123\",\n  \"supplierBusinessCode\": \"SAMPLE_CODE\"\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/single-use-tokens",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "single-use-tokens"
+          ]
+        }
+      }
+    }
+  ],
+  "event": []
+}

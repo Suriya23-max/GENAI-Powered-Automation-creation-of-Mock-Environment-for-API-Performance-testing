@@ -1,0 +1,11 @@
+{
+  "status": 200,
+  "body": {
+    "scheduleType": "STOP_AFTER_SET_NUMBER_OF_PAYMENTS",
+    "frequency": "FORTNIGHTLY",
+    "nextPaymentDate": "{{currentDate}}",
+    "instalmentAmount": "6.00",
+    "remainingInstalments": "2",
+    "currency": "AUD"
+  }
+}
